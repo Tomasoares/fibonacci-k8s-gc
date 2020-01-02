@@ -15,7 +15,7 @@ spec:
       volumes:
         - name: postgres-storage
           persistentVolumeClaim:
-            claimName: postgres-pvc
+            claimName: postgres-pvc-2
       containers:
         - name: postgres
           image: postgres
@@ -23,7 +23,7 @@ spec:
             - containerPort: 5432
           volumeMounts:
             - name: postgres-storage
-              mountPath: /var/lib/volumes
+              mountPath: /var/lib/pgvolumes
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
@@ -31,5 +31,5 @@ spec:
                   name: pgpassword
                   key: PGPASSWORD
             - name: PGDATA
-              value: /var/lib/volumes
+              value: /var/lib/pgvolumes
                   
