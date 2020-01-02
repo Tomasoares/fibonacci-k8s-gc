@@ -12,6 +12,6 @@ docker push tomasoares/fibonacci-worker:$SHA
 
 kubectl apply -f k8s
 
-kubectl set image deployment/worker-deployment server=tomasoares/fibonacci-worker:$SHA
-kubectl set image deployment/server-deployment server=tomasoares/fibonacci-server:$SHA
-kubectl set image deployment/client-deployment server=tomasoares/fibonacci-client:$SHA
+kubectl set image deployments/worker-deployment worker=tomasoares/fibonacci-worker:$SHA
+kubectl set image deployments/server-deployment server=tomasoares/fibonacci-server:$SHA
+kubectl set image deployments/client-deployment client=tomasoares/fibonacci-client:$SHA
