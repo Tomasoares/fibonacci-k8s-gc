@@ -6,7 +6,7 @@ metadata:
     volume.alpha.kubernetes.io/storage-class: default
 spec:
   accessModes:
-    - ReadWriteMulti
+    - ReadWriteMany
   resources:
     requests:
       storage: 2Gi
