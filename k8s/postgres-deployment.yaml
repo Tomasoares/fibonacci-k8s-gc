@@ -24,6 +24,7 @@ spec:
           volumeMounts:
             - name: postgres-storage
               mountPath: /var/lib/pgvolumes
+              subPath: data
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
@@ -31,5 +32,5 @@ spec:
                   name: pgpassword
                   key: PGPASSWORD
             - name: PGDATA
-              value: /var/lib/pgvolumes
+              value: /var/lib/pgvolumes/data
                   
