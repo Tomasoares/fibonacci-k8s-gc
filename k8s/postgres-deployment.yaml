@@ -23,7 +23,7 @@ spec:
             - containerPort: 5432
           volumeMounts:
             - name: postgres-storage
-              mountPath: /var/lib/pgvolumes
+              mountPath: /var/lib/postgres/volumes
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
@@ -31,5 +31,5 @@ spec:
                   name: pgpassword
                   key: PGPASSWORD
             - name: PGDATA
-              value: /var/lib/pgvolumes/data
+              value: /var/lib/postgres/volumes/data
                   
