@@ -1,36 +1,45 @@
-apiVersion: skaffold/v1beta2
+apiVersion: skaffold/v2alpha1
 kind: Config
 build:
   local:
-    pulse: false
+    push: false
   artifacts:
     - image: tomasoares/fibonacci-client
       context: client
       docker:
         dockerfile: Dockerfile.dev
       sync:
-        - '**/*.js': .
-        - '**/*.css': .
-        - '**/*.html': .
-    - image: tomasoares/server-client
+        infer:
+          - '**/*.js'
+          - '**/*.css'
+          - '**/*.html'
+    - image: tomasoares/fibonacci-server
       context: server
       docker:
         dockerfile: Dockerfile.dev
       sync:
-        - '**/*.js': .
-    - image: tomasoares/worker-client
+        infer:
+          - '**/*.js'
+    - image: tomasoares/fibonacci-worker
       context: worker
       docker:
         dockerfile: Dockerfile.dev
       sync:
-        - '**/*.js': .
+        infer:
+          - '**/*.js'
 deploy:
   kubectl:
-    manifest:
+    manifests:
       - k8s/client-deployment.yaml
       - k8s/server-deployment.yaml
       - k8s/worker-deployment.yaml
+      - k8s/dev/database-persistent-volume-claim.yaml
+      - k8s/dev/database-persistent-volume.yaml
+      - k8s/ingress-service.yaml
+      - k8s/postgres-cluster-ip-service.yaml
+      - k8s/postgres-deployment.yaml
+      - k8s/redis-cluster-ip-service.yaml
+      - k8s/redis-deployment.yaml
       - k8s/client-cluster-ip-service.yaml
       - k8s/server-cluster-ip-service.yaml
-      - k8s/worker-cluster-ip-service.yaml
         
